@@ -20,9 +20,7 @@ RUN mv ssr /root/
 
 # net-speeder
 RUN git clone https://github.com/snooda/net-speeder.git net-speeder
-WORKDIR net-speeder
-RUN sh build.sh
 RUN mv net-speeder /root/
+WORKDIR /root/net-speeder
 RUN chmod 777 -R /root/net-speeder
-
-
+RUN sh build.sh
