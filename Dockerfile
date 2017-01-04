@@ -32,6 +32,6 @@ RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # KCPtun
 RUN mkdir /root/kcp
-RUN wget https://github.com/xtaci/kcptun/releases/download/v${KCPTUN_VERSION}/kcptun-linux-amd64-${KCPTUN_VERSION}.tar.gz /root/kcp/
 WORKDIR /root/kcp
+RUN wget https://github.com/xtaci/kcptun/releases/download/v${KCPTUN_VERSION}/kcptun-linux-amd64-${KCPTUN_VERSION}.tar.gz
 tar -zxvf kcptun-linux-amd64-${KCPTUN_VERSION}.tar.gz
