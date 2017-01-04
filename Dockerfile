@@ -21,7 +21,12 @@ RUN git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git ssr
 RUN mv ssr /root/
 WORKDIR /root/ssr
 RUN cp ./config.json ./user-config.json
-RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -ri 's/^.*password.*/    \"password\": \"supppig\",/' ./user-config.json
+RUN sed -ri 's/^.*method.*/    \"method\": \"rc4-md5\",/' ./user-config.json
+RUN sed -ri 's/^.*protocol.*/    \"protocol\": \"auth_sha1_v2_compatible\",/' ./user-config.json
+RUN sed -ri 's/^.*obfs.*/    \"obfs\": \"tls1.2_ticket_auth_compatible\",/' ./user-config.json
+RUN sed -ri 's/^.*fast_open.*/    \"fast_open\": true/' ./user-config.json
+RUN nohup python ./shadowsocks/server.py -d start
 
 # net-speeder
 #RUN git clone https://github.com/snooda/net-speeder.git net-speeder
@@ -34,4 +39,4 @@ RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN mkdir /root/kcp
 WORKDIR /root/kcp
 RUN wget https://github.com/xtaci/kcptun/releases/download/v${KCPTUN_VERSION}/kcptun-linux-amd64-${KCPTUN_VERSION}.tar.gz
-tar -zxvf kcptun-linux-amd64-${KCPTUN_VERSION}.tar.gz
+RUN tar -zxvf kcptun-linux-amd64-${KCPTUN_VERSION}.tar.gz
